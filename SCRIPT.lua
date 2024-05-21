@@ -5,7 +5,7 @@ local Window =asdlib:MakeWindow({Name = "asd script", HidePremium = false, Intro
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
-
+--humanoid.WalkSpeed
 
 
 
@@ -22,16 +22,11 @@ local Tab = Window:MakeTab({
 local Section = Tab:AddSection({
 	Name = "MAIN HACK"
 })
-Tab:AddSlider({
-	Name = "WALK SPEED",
-	Min = 0,
-	Max = 100,
-	Default = 5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "speed",
+Tab:AddTextbox({
+	Name = "SPEED",
+	Default = "number",
+	TextDisappear = true,
 	Callback = function(Value)
 		humanoid.WalkSpeed = Value
-	end    
+	end	  
 })
-
