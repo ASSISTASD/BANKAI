@@ -3,16 +3,24 @@ local asdlib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlex
 local Window =asdlib:MakeWindow({Name = "asd script", HidePremium = false, IntroText = "ASD", SaveConfig = true, ConfigFolder = "ASD"})
 
 local Tab = Window:MakeTab({
-	Name = "ESP",
+	Name = "MAIN",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-	Name = "MAIN ESP"
+	Name = "MAIN HACK"
 })
-Tab:AddToggle({
-	Name = "ESP PLAYERS",
-	Default = false,
+Tab:AddSlider({
+	Name = "Slider",
+	Min = 0,
+	Max = 100,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "bananas",
 	Callback = function(Value)
+		print(Value)
+	end    
 })
+
