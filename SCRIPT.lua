@@ -1,6 +1,17 @@
 local asdlib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window =asdlib:MakeWindow({Name = "asd script", HidePremium = false, IntroText = "ASD", SaveConfig = true, ConfigFolder = "ASD"})
+-- set local
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+
+
+
+
+
+
 
 local Tab = Window:MakeTab({
 	Name = "MAIN",
@@ -12,15 +23,15 @@ local Section = Tab:AddSection({
 	Name = "MAIN HACK"
 })
 Tab:AddSlider({
-	Name = "Slider",
+	Name = "WALK SPEED",
 	Min = 0,
 	Max = 100,
 	Default = 5,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
-	ValueName = "bananas",
+	ValueName = "speed",
 	Callback = function(Value)
-		print(Value)
+		humanoid.WalkSpeed = Value
 	end    
 })
 
