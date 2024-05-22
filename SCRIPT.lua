@@ -921,7 +921,7 @@ TPTAP:AddButton({
 ------------------$$$$$$$$$$$$$_G.Auto_Farm_Level = value
 
 local AFTAP = Window:MakeTab({
-	Name = "TELEPORT",
+	Name = "AUTO FARM",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -937,7 +937,7 @@ AFTAP:AddDropdown({
 
 AFTAP:AddToggle({
 	Name = "AUTO FARM",
-	Default = false,
+	Default = _G.Auto_Farm_Level,
 	Callback = function(Value)
 		_G.Auto_Farm_Level = Value
 	end    
