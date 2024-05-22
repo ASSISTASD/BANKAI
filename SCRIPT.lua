@@ -19,13 +19,25 @@ spawn(function()
 			end
 		end)
 
-
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.No_clip then
+                for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false    
+                    end
+                end
+            end
+        end)
+    end)
+end)
 
 
 
 
 local Tab = Window:MakeTab({
-	Name = "MAIN",
+	Name = "Misc",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -38,6 +50,14 @@ Tab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.WalkWater = Value
+	end    
+})
+
+Tab:AddToggle({
+	Name = "NO CLIP",
+	Default = false,
+	Callback = function(Value)
+		_G.No_clip = Value
 	end    
 })
 
