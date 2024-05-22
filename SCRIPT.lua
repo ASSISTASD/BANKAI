@@ -6,7 +6,18 @@ local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 --humanoid.WalkSpeed
-
+------------------ fun
+spawn(function()
+			while task.wait() do
+				pcall(function()
+					if _G.WalkWater then
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+					else
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+					end
+				end)
+			end
+		end)
 
 
 
@@ -22,11 +33,11 @@ local Tab = Window:MakeTab({
 local Section = Tab:AddSection({
 	Name = "MAIN HACK"
 })
-Tab:AddTextbox({
-	Name = "SPEED",
-	Default = "number",
-	TextDisappear = true,
+Tab:AddToggle({
+	Name = "WALK IN WATER",
+	Default = false,
 	Callback = function(Value)
-		humanoid.WalkSpeed = Value
-	end	  
+		_G.WalkWater = Value
+	end    
 })
+
