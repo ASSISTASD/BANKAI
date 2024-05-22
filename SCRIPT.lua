@@ -19,6 +19,28 @@ end
 
 
 ------------------ fun
+function EquipWeaponSword()
+	pcall(function()
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+			if v.ToolTip == "Sword" and v:IsA('Tool') then
+				local ToolHumanoid = game.Players.LocalPlayer.Backpack:FindFirstChild(v.Name) 
+				game.Players.LocalPlayer.Character.Humanoid:EquipTool(ToolHumanoid) 
+			end
+		end
+	end)
+end
+
+function EquipWeaponMelee()
+	pcall(function()
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+			if v.ToolTip == "Melee" and v:IsA('Tool') then
+				local ToolHumanoid = game.Players.LocalPlayer.Backpack:FindFirstChild(v.Name) 
+				game.Players.LocalPlayer.Character.Humanoid:EquipTool(ToolHumanoid) 
+			end
+		end
+	end)
+end
+
 function AutoHaki()
 	if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
@@ -1163,6 +1185,7 @@ AFTAP:AddToggle({
 	Default = _G.Auto_Farm_Level,
 	Callback = function(Value)
 		_G.Auto_Farm_Level = Value
+		StopTween(_G.Auto_Farm_Level)
 	end    
 })
 
@@ -1171,6 +1194,7 @@ AFTAP:AddToggle({
 	Default = _G.Auto_Farm_Bone,
 	Callback = function(Value)
 		_G.Auto_Farm_Bone = Value
+		StopTween(_G.Auto_Farm_Bone)
 	end    
 })
 
