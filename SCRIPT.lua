@@ -15,7 +15,20 @@ elseif game.PlaceId == 7449423635 then
 end
  
 --humanoid.WalkSpeed
+
+
+
 ------------------ fun
+function EquipWeapon(ToolSe)
+	if not _G.NotAutoEquip then
+		if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+			Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+			wait(.1)
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+		end
+	end
+end
+
 function topos(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
@@ -1007,6 +1020,34 @@ function CheckQuest()
     end
 end
 
+function EquipWeapon(ToolSe)
+if not _G.NotAutoEquip then
+if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+wait(.1)
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+end
+end
+end
+
+if _G.Select_Weapon == nil then
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+if v.ToolTip == "Melee" then
+if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+_G.Select_Weapon = tostring(v.Name)
+end
+end
+end
+end
+
+WeaponList = {}
+
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+if v:IsA("Tool") then
+table.insert(WeaponList ,v.Name)
+end
+end
+
 local Tab = Window:MakeTab({
 	Name = "MISC",
 	Icon = "rbxassetid://4483345998",
@@ -1049,9 +1090,8 @@ TPTAP:AddButton({
 })
 
 ------------------$$$$$$$$$$$$$_G.Auto_Farm_Level = value
-
 local AFTAP = Window:MakeTab({
-	Name = "TELEPORT",
+	Name = "AUTO FARM",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -1062,6 +1102,15 @@ AFTAP:AddDropdown({
 	Options = {"Level Farm","Fast Mode","No Quest","Near Farm Mode"},
 	Callback = function(Value)
 		_G.Select_Mode_Farm = Value
+	end    
+})
+
+AFTAP:AddDropdown({
+	Name = "Select Weapons",
+	Default = WeaponList,
+	Options = WeaponList,
+	Callback = function(Value)
+		_G.Select_Weapon = Value
 	end    
 })
 
@@ -1080,3 +1129,14 @@ AFTAP:AddToggle({
 		_G.Auto_Farm_Bone = Value
 	end    
 })
+
+AFTAP:AddButton({
+	Name = "RW",
+	Callback = function()
+      		SelectWeapona:Clear()
+            for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                  SelectWeapona:Add(v.Name)
+            end
+  	end    
+})
+
