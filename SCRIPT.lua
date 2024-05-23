@@ -19,23 +19,6 @@ end
 
 
 ------------------ fun
-if World2 then
-		DevilFruit:Button("TP Flower Red",function()
-			for i,v in pairs(game.Workspace:GetDescendants()) do
-				if v.Name == "Flower2" then
-				    topos(v.CFrame)
-				end
-			end
-		end)
-
-		DevilFruit:Button("TP Flower Blue",function()
-			for i,v in pairs(game.Workspace:GetDescendants()) do
-				if v.Name == "Flower1" then
-					topos(v.CFrame)
-				end
-			end
-		end)
-	end
 
 	function isnil(thing)
 		return (thing == nil)
@@ -385,7 +368,7 @@ Tab:AddToggle({
 		_G.No_clip = Value
 	end    
 })
-TPTAP:AddButton({
+Tab:AddButton({
 	Name = "TEAM PIRATES ",
 	Callback = function()
     local args = {
@@ -401,7 +384,7 @@ TPTAP:AddButton({
 		
 })
 
-TPTAP:AddButton({
+Tab:AddButton({
 	Name = "TEAM MARINES ",
 	Callback = function()
     local args = {
