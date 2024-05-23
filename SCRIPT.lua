@@ -19,6 +19,48 @@ end
 
 
 ------------------ fun
+spawn(function()
+	while wait() do
+		if _G.Teleport_to_Player then
+			pcall(function()
+				if game.Players:FindFirstChild(_G.Select_Player) then
+					topos(game.Players[_G.Select_Player].Character.HumanoidRootPart.CFrame)
+				end
+			end)
+		end
+	end
+end)
+
+spawn(function()
+	while wait() do
+		if _G.Spectate_Player then
+			pcall(function()
+				if game.Players:FindFirstChild(_G.Select_Player) then
+					game.Workspace.Camera.CameraSubject = game.Players:FindFirstChild(_G.Select_Player).Character.Humanoid
+				end
+			end)
+		else
+			game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+		end
+	end
+end)
+
+spawn(function()
+			while task.wait() do
+				if _G.AutoStoreFruit then
+					pcall(function()
+						for i,v in pairs(Fruit) do
+						for x,y in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+							if string.find(y.Name,"Fruit") then
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v,game.Players.LocalPlayer.Backpack[y.Name])
+							end
+						end
+						end
+					end)
+				end
+			end
+		end)
+ 
 
 	function isnil(thing)
 		return (thing == nil)
@@ -344,6 +386,13 @@ table.insert(WeaponList ,v.Name)
 end
 end
 
+Playerslist = {}
+    
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(Playerslist,v.Name)
+    end
+    
+
 local Tab = Window:MakeTab({
 	Name = "MISC",
 	Icon = "rbxassetid://4483345998",
@@ -494,6 +543,52 @@ ESPTAP:AddToggle({
 		while ChestESP do wait()
 			UpdateChestChams() 
 		end
+	end    
+})
+ESPTAP:AddToggle({
+	Name = "AUTO STORE",
+	Default = _G.AutoStoreFruit,
+	Callback = function(Value)
+		_G.AutoStoreFruit = Value
+	end    
+})
+local COMBATTAP = Window:MakeTab({
+	Name = "COMBAT",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+COMBATTAP:AddDropdown({
+	Name = "SELECT PLAYER",
+	Default = Playerslist,
+	Callback = function(Value)
+		_G.Select_Player = Value
+	end    
+})
+
+
+COMBATTAP:AddButton({
+	Name = "REFLICH PLAYER",
+	Callback = function()
+      	Playerslist = {}
+        SelectedPly:Clear()
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do  
+            SelectedPly:Add(v.Name)
+        end
+  	end    
+})
+COMBATTAP:AddToggle({
+	Name = "SPECTATE PLAYER",
+	Default = _G.Spectate_Player,
+	Callback = function(Value)
+		_G.Spectate_Player = Value
+	end    
+})
+
+COMBATTAP:AddToggle({
+	Name = "TP PLAYER",
+	Default = _G.Teleport_to_Player,
+	Callback = function(Value)
+		_G.Teleport_to_Player = Value
 	end    
 })
 
