@@ -1186,7 +1186,6 @@ end)
 
 
 local WeaponList = {"Melee","Sword","Fruit","Gun"}
-_G.SelectWeapon = "Melee"
 
 task.spawn(function()
 	while wait() do
