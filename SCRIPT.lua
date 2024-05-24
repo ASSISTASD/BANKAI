@@ -433,6 +433,12 @@ table.insert(WeaponList ,v.Name)
 end
 end
 
+Playerslist = {}
+    
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(Playerslist,v.Name)
+    end
+    
 
     
 
@@ -601,17 +607,12 @@ local COMBATTAP = Window:MakeTab({
 	PremiumOnly = false
 })
 ---------------ww
-Playerslist = {}
-    
-    for i,v in pairs(game:GetService("Players"):GetChildren()) do
-        table.insert(Playerslist,v.Name)
-    end
-    
-    local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
+
+local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
 		_G.Select_Player = Value
-	end    
-    })
-    COMBATTAP:AddButton({
+end    
+})
+COMBATTAP:AddButton({
 	Name = "REFLICH PLAYER",
 	Callback = function()
       	Playerslist = {}
@@ -619,9 +620,19 @@ Playerslist = {}
         for i,v in pairs(game:GetService("Players"):GetChildren()) do  
             SelectedPly:Add(v.Name)
         end
-  	end    
-    })
+  	end     
+})
+    
 
+
+
+
+
+
+
+
+
+    
 
 
 
