@@ -843,7 +843,6 @@ function CheckQuest()
         end
     end
 
-WeaponList = {"Melee","Sword","Fruit","Gun"}
 
 task.spawn(function()
 	while wait() do
@@ -898,8 +897,8 @@ local AFTAP = Window:MakeTab({
 
 AFTAP:AddDropdown({
 	Name = "Select Weapons",
-	Default = WeaponList,
-	Options = WeaponList,
+	Default = "Melee",
+	Options = {"Melee","Sword","Fruit","Gun"},
 	Callback = function(Value)
 		_G.SelectWeapon = Value
 	end    
