@@ -32,7 +32,7 @@ spawn(function()
 					local Dist = (TheirPos - MousePos).Magnitude
 					if Dist < MaxDist and Dist <= _G.Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
 						MaxDist = Dist
-						_G.Aim_Players = v
+						_G.Aim_Players = _G.Aim_Players.Character.HumanoidRootPart.Position
 					end
 				end
 			end)
