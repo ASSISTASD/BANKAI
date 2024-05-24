@@ -906,8 +906,8 @@ AFTAP:AddDropdown({
 
 AFTAP:AddDropdown({
 	Name = "Select mod",
-	Default = FarmMode,
-	Options = FarmMode,
+	Default = "Normal",
+	Options = {"Normal", "Not Tween To Npc Quest"},
 	Callback = function(Value)
 		FarmMode = Value
 	end    
