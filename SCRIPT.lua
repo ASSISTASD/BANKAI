@@ -1183,7 +1183,7 @@ spawn(function()
 end)
 
 
-local WeaponList = {"Melee","Sword","Fruit","Gun"}
+WeaponList = {"Melee","Sword","Fruit","Gun"}
 
 task.spawn(function()
 	while wait() do
@@ -1231,6 +1231,10 @@ Playerslist = {}
     for i,v in pairs(game:GetService("Players"):GetChildren()) do
         table.insert(Playerslist,v.Name)
     end
+    
+    
+ListF = {"Normal", "Not Tween To Npc Quest"}
+
     
 local Tab = Window:MakeTab({
 	Name = "MISC",
@@ -1321,16 +1325,16 @@ AFTAP:AddDropdown({
 	end    
 })
 
-
-AFTAP:AddButton({
-	Name = "RW",
-	Callback = function()
-      		SelectWeapona:Clear()
-            for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                  SelectWeapona:Add(v.Name)
-            end
-  	end    
+AFTAP:AddDropdown({
+	Name = "Select mod",
+	Default = FarmMode,
+	Options = FarmMode,
+	Callback = function(Value)
+		FarmMode = Value
+	end    
 })
+
+
 
 AFTAP:AddToggle({
 	Name = "AUTO FARM LEVEL",
