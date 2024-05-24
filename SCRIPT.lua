@@ -20,7 +20,11 @@ end
 
 
 ------------------ fun
-
+local old; old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+  if self.Name == "CommE" then
+  local args = {
+   ...
+  }
 
 
 local lp = game:GetService('Players').LocalPlayer
@@ -38,12 +42,32 @@ spawn(function()
 					if Dist < MaxDist and Dist <= _G.Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
 						MaxDist = Dist
 						_G.Aim_Players = v
-						_G.Aim_Players.Character.HumanoidRootPart.Position
 					end
 				end
 			end)
 		end
 	end
+end)
+
+spawn(function()
+	local gg = getrawmetatable(game)
+	local old = gg.__namecall
+	setreadonly(gg,false)
+	gg.__namecall = newcclosure(function(...)
+		local method = getnamecallmethod()
+		local args = {...}
+		if tostring(method) == "FireServer" then
+			if tostring(args[1]) == "RemoteEvent" then
+				if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+					if _G.Aimbot_Skill_Fov then
+						args[2] = _G.Aim_Players.Character.HumanoidRootPart.Position
+						return old(unpack(args))
+					end
+				end
+			end
+		end
+		return old(...)
+	end)
 end)
 
 
@@ -604,18 +628,6 @@ COMBATTAP:AddButton({
   	end     
 })
     
-
-
-
-
-
-
-
-
-
-    
-
-
 
 COMBATTAP:AddToggle({
 	Name = "SPECTATE PLAYER",
