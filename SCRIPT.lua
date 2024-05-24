@@ -843,8 +843,7 @@ function CheckQuest()
         end
     end
 
-
-task.spawn(function()
+spawn(function()
 	while wait() do
 		pcall(function()
 			if _G.SelectWeapon == "Melee" then
