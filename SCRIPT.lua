@@ -595,8 +595,8 @@ COMBATTAP:AddToggle({
 
 COMBATTAP:AddToggle({
 	Name = "AIMBOT SKILLS",
-	Default = _G.Aimbot_Skill_Fov,
+	Default = _G.Teleport_to_Player,
 	Callback = function(Value)
-		_G.Aimbot_Skill_Fov = Value
+		_G.Teleport_to_Player = Value
 	end    
 })
