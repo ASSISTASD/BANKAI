@@ -2,6 +2,7 @@ local asdlib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlex
 
 local Window =asdlib:MakeWindow({Name = "asd script", HidePremium = false, IntroText = "ASD", SaveConfig = true, ConfigFolder = "ASD"})
 -- set local
+local _G.Select_Size_Fov = 360
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -19,6 +20,52 @@ end
 
 
 ------------------ fun
+
+
+
+local lp = game:GetService('Players').LocalPlayer
+local mouse = lp:GetMouse()
+spawn(function()
+	while wait() do
+		if _G.Aimbot_Skill_Fov then
+			pcall(function()
+				local MaxDist, Closest = math.huge
+				for i,v in pairs(game:GetService("Players"):GetChildren()) do 
+					local Head = v.Character:FindFirstChild("HumanoidRootPart")
+					local Pos, Vis = game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera, Head.Position)
+					local MousePos, TheirPos = Vector2.new(mouse.X, mouse.Y), Vector2.new(Pos.X, Pos.Y)
+					local Dist = (TheirPos - MousePos).Magnitude
+					if Dist < MaxDist and Dist <= _G.Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
+						MaxDist = Dist
+						_G.Aim_Players = v
+					end
+				end
+			end)
+		end
+	end
+end)
+
+spawn(function()
+	local gg = getrawmetatable(game)
+	local old = gg.__namecall
+	setreadonly(gg,false)
+	gg.__namecall = newcclosure(function(...)
+		local method = getnamecallmethod()
+		local args = {...}
+		if tostring(method) == "FireServer" then
+			if tostring(args[1]) == "RemoteEvent" then
+				if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+					if _G.Aimbot_Skill_Fov then
+						args[2] = _G.Aim_Players.Character.HumanoidRootPart.Position
+						return old(unpack(args))
+					end
+				end
+			end
+		end
+		return old(...)
+	end)
+end)
+
 spawn(function()
 	while wait() do
 		if _G.Teleport_to_Player then
@@ -386,11 +433,7 @@ table.insert(WeaponList ,v.Name)
 end
 end
 
-Playerslist = {}
-    
-    for i,v in pairs(game:GetService("Players"):GetChildren()) do
-        table.insert(Playerslist,v.Name)
-    end
+
     
 
 local Tab = Window:MakeTab({
@@ -558,13 +601,17 @@ local COMBATTAP = Window:MakeTab({
 	PremiumOnly = false
 })
 ---------------ww
-local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
+Playerslist = {}
+    
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(Playerslist,v.Name)
+    end
+    
+    local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
 		_G.Select_Player = Value
 	end    
-})
-
-
-COMBATTAP:AddButton({
+    })
+    COMBATTAP:AddButton({
 	Name = "REFLICH PLAYER",
 	Callback = function()
       	Playerslist = {}
@@ -573,7 +620,11 @@ COMBATTAP:AddButton({
             SelectedPly:Add(v.Name)
         end
   	end    
-})
+    })
+
+
+
+
 COMBATTAP:AddToggle({
 	Name = "SPECTATE PLAYER",
 	Default = _G.Spectate_Player,
@@ -590,3 +641,10 @@ COMBATTAP:AddToggle({
 	end    
 })
 
+COMBATTAP:AddToggle({
+	Name = "AIMBOT SKILLS",
+	Default = _G.Aimbot_Skill_Fov,
+	Callback = function(Value)
+		_G.Aimbot_Skill_Fov = Value
+	end    
+})
