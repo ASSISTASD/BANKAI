@@ -557,10 +557,8 @@ local COMBATTAP = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-COMBATTAP:AddDropdown({
-	Name = "SELECT PLAYER",
-	Default = Playerslist,
-	Callback = function(Value)
+---------------ww
+local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
 		_G.Select_Player = Value
 	end    
 })
