@@ -436,6 +436,51 @@ local BonePos = CFrame.new(-9506.234375, 172.130615234375, 6117.0771484375)
     end)
     
 -------------------mobs for atf
+spawn(function()
+    while wait(.1) do
+        if _G.AUTOHAKI then 
+            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                local args = {
+                    [1] = "Buso"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+end)
+
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack then
+            if typeof(y) == "table" then
+                pcall(function()
+                    CameraShaker:Stop()
+                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    y.activeController.timeToNextAttack = 0
+                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.active = false
+                    y.activeController.timeToNextBlock = 0
+                    y.activeController.focusStart = 1655503339.0980349
+                    y.activeController.increment = 1
+                    y.activeController.blocking = false
+                    y.activeController.attacking = false
+                    y.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
 
 
 
@@ -470,7 +515,7 @@ AFTAP:AddDropdown({
 
 
 AFTAP:AddToggle({
-	Name = "AUTO FARM BONE",
+	Name = "AUTO FARM BONE (not working)",
 	Default = _G.Auto_Bone,
 	Callback = function(Value)
 		_G.Auto_Bone = Value
@@ -478,5 +523,34 @@ AFTAP:AddToggle({
 	end    
 })
 
+local STAP = Window:MakeTab({
+	Name = "SETTING",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+STAP:AddToggle({
+	Name = "FAST ATTACK",
+	Default = true,
+	Callback = function(Value)
+		_G.FastAttack = Value
+	end    
+})
+
+STAP:AddToggle({
+	Name = "BYPASS TP",
+	Default = BypassTP,
+	Callback = function(Value)
+		BypassTP = Value
+	end    
+})
+
+STAP:AddToggle({
+	Name = "AUTO HAKI",
+	Default = true,
+	Callback = function(Value)
+		_G.AUTOHAKI = Value
+	end    
+})
 
 
