@@ -2,7 +2,6 @@ local asdlib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlex
 
 local Window =asdlib:MakeWindow({Name = "asd script", HidePremium = false, IntroText = "ASD", SaveConfig = true, ConfigFolder = "ASD"})
 -- set local
-local _G.Select_Size_Fov = 360
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
