@@ -19,219 +19,6 @@ end
  
  
 
-local Tab = Window:MakeTab({
-	Name = "MISC",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-	Name = "MAIN HACK"
-})
-Tab:AddToggle({
-	Name = "WALK IN WATER",
-	Default = false,
-	Callback = function(Value)
-		_G.WalkWater = Value
-	end    
-})
-
-Tab:AddToggle({
-	Name = "NO CLIP",
-	Default = false,
-	Callback = function(Value)
-		_G.No_clip = Value
-	end    
-})
-Tab:AddButton({
-	Name = "TEAM PIRATES ",
-	Callback = function()
-    local args = {
-			[1] = "SetTeam",
-			[2] = "Pirates"
-		}
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
-		local args = {
-			[1] = "BartiloQuestProgress"
-		}
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-	end
-		
-})
-
-Tab:AddButton({
-	Name = "TEAM MARINES ",
-	Callback = function()
-    local args = {
-			[1] = "SetTeam",
-			[2] = "Marines"
-		}
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
-		local args = {
-			[1] = "BartiloQuestProgress"
-		}
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-	end
-		
-})
-
-
----------------------$$$$$$$$$$$$$
-local TPTAP = Window:MakeTab({
-	Name = "TELEPORT",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-TPTAP:AddButton({
-	Name = "Teleport Temple Of Time",
-	Callback = function()
-      		Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
-  	end    
-})
-
-------------------$$$$$$$$$$$$$_G.Auto_Farm_Level = value
-local AFTAP = Window:MakeTab({
-	Name = "AUTO FARM",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-
-
-AFTAP:AddDropdown({
-	Name = "Select Weapons",
-	Default = WeaponList,
-	Options = WeaponList,
-	Callback = function(Value)
-		_G.SelectWeapon = Value
-	end    
-})
-
-
-AFTAP:AddButton({
-	Name = "RW",
-	Callback = function()
-      		SelectWeapona:Clear()
-            for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                  SelectWeapona:Add(v.Name)
-            end
-  	end    
-})
-
-AFTAP:AddToggle({
-	Name = "AUTO FARM LEVEL",
-	Default = true,
-	Callback = function(Value)
-		_G.AutoFarm = Value
-	end    
-})
-
-local STAP = Window:MakeTab({
-	Name = "SETTING",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-STAP:AddToggle({
-	Name = "FAST ATTACK",
-	Default = true,
-	Callback = function(Value)
-		_G.FastAttack = Value
-	end    
-})
-
-local ESPTAP = Window:MakeTab({
-	Name = "ESP",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-ESPTAP:AddToggle({
-	Name = "ESP FRUIT",
-	Default = false,
-	Callback = function(a)
-		DevilFruitESP = a
-		while DevilFruitESP do wait()
-			UpdateDevilChams() 
-		end
-	end    
-})
-
-ESPTAP:AddToggle({
-	Name = "ESP PLAYERS",
-	Default = false,
-	Callback = function(a)
-		ESPPlayer = a
-		while ESPPlayer do wait()
-			UpdatePlayerChams() 
-		end
-	end    
-})
-
-ESPTAP:AddToggle({
-	Name = "ESP CHEST",
-	Default = false,
-	Callback = function(a)
-		ChestESP = a
-		while ChestESP do wait()
-			UpdateChestChams() 
-		end
-	end    
-})
-ESPTAP:AddToggle({
-	Name = "AUTO STORE",
-	Default = _G.AutoStoreFruit,
-	Callback = function(Value)
-		_G.AutoStoreFruit = Value
-	end    
-})
-local COMBATTAP = Window:MakeTab({
-	Name = "COMBAT",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
----------------ww
-
-local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
-		_G.Select_Player = Value
-end    
-})
-COMBATTAP:AddButton({
-	Name = "REFLICH PLAYER",
-	Callback = function()
-      	Playerslist = {}
-        SelectedPly:Clear()
-        for i,v in pairs(game:GetService("Players"):GetChildren()) do  
-            SelectedPly:Add(v.Name)
-        end
-  	end     
-})
-    
-
-COMBATTAP:AddToggle({
-	Name = "SPECTATE PLAYER",
-	Default = _G.Spectate_Player,
-	Callback = function(Value)
-		_G.Spectate_Player = Value
-	end    
-})
-
-COMBATTAP:AddToggle({
-	Name = "TP PLAYER",
-	Default = _G.Teleport_to_Player,
-	Callback = function(Value)
-		_G.Teleport_to_Player = Value
-	end    
-})
-
-COMBATTAP:AddToggle({
-	Name = "AIMBOT SKILLS",
-	Default = false,
-	Callback = function(Value)
-		AimSkillNearest = Value
-	end    
-})
 
 --humanoid.WalkSpeed
 function TP1(Pos)
@@ -1445,5 +1232,218 @@ Playerslist = {}
         table.insert(Playerslist,v.Name)
     end
     
+local Tab = Window:MakeTab({
+	Name = "MISC",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "MAIN HACK"
+})
+Tab:AddToggle({
+	Name = "WALK IN WATER",
+	Default = false,
+	Callback = function(Value)
+		_G.WalkWater = Value
+	end    
+})
+
+Tab:AddToggle({
+	Name = "NO CLIP",
+	Default = false,
+	Callback = function(Value)
+		_G.No_clip = Value
+	end    
+})
+Tab:AddButton({
+	Name = "TEAM PIRATES ",
+	Callback = function()
+    local args = {
+			[1] = "SetTeam",
+			[2] = "Pirates"
+		}
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+		local args = {
+			[1] = "BartiloQuestProgress"
+		}
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+	end
+		
+})
+
+Tab:AddButton({
+	Name = "TEAM MARINES ",
+	Callback = function()
+    local args = {
+			[1] = "SetTeam",
+			[2] = "Marines"
+		}
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+		local args = {
+			[1] = "BartiloQuestProgress"
+		}
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+	end
+		
+})
+
+
+---------------------$$$$$$$$$$$$$
+local TPTAP = Window:MakeTab({
+	Name = "TELEPORT",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+TPTAP:AddButton({
+	Name = "Teleport Temple Of Time",
+	Callback = function()
+      		Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+  	end    
+})
+
+------------------$$$$$$$$$$$$$_G.Auto_Farm_Level = value
+local AFTAP = Window:MakeTab({
+	Name = "AUTO FARM",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+
+AFTAP:AddDropdown({
+	Name = "Select Weapons",
+	Default = WeaponList,
+	Options = WeaponList,
+	Callback = function(Value)
+		_G.SelectWeapon = Value
+	end    
+})
+
+
+AFTAP:AddButton({
+	Name = "RW",
+	Callback = function()
+      		SelectWeapona:Clear()
+            for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                  SelectWeapona:Add(v.Name)
+            end
+  	end    
+})
+
+AFTAP:AddToggle({
+	Name = "AUTO FARM LEVEL",
+	Default = true,
+	Callback = function(Value)
+		_G.AutoFarm = Value
+	end    
+})
+
+local STAP = Window:MakeTab({
+	Name = "SETTING",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+STAP:AddToggle({
+	Name = "FAST ATTACK",
+	Default = true,
+	Callback = function(Value)
+		_G.FastAttack = Value
+	end    
+})
+
+local ESPTAP = Window:MakeTab({
+	Name = "ESP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+ESPTAP:AddToggle({
+	Name = "ESP FRUIT",
+	Default = false,
+	Callback = function(a)
+		DevilFruitESP = a
+		while DevilFruitESP do wait()
+			UpdateDevilChams() 
+		end
+	end    
+})
+
+ESPTAP:AddToggle({
+	Name = "ESP PLAYERS",
+	Default = false,
+	Callback = function(a)
+		ESPPlayer = a
+		while ESPPlayer do wait()
+			UpdatePlayerChams() 
+		end
+	end    
+})
+
+ESPTAP:AddToggle({
+	Name = "ESP CHEST",
+	Default = false,
+	Callback = function(a)
+		ChestESP = a
+		while ChestESP do wait()
+			UpdateChestChams() 
+		end
+	end    
+})
+ESPTAP:AddToggle({
+	Name = "AUTO STORE",
+	Default = _G.AutoStoreFruit,
+	Callback = function(Value)
+		_G.AutoStoreFruit = Value
+	end    
+})
+local COMBATTAP = Window:MakeTab({
+	Name = "COMBAT",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+---------------ww
+
+local SelectedPly = COMBATTAP:AddDropdown({Name = "SELECT PLAYER",Default = Playerslist,Callback = function(Value)
+		_G.Select_Player = Value
+end    
+})
+COMBATTAP:AddButton({
+	Name = "REFLICH PLAYER",
+	Callback = function()
+      	Playerslist = {}
+        SelectedPly:Clear()
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do  
+            SelectedPly:Add(v.Name)
+        end
+  	end     
+})
+    
+
+COMBATTAP:AddToggle({
+	Name = "SPECTATE PLAYER",
+	Default = _G.Spectate_Player,
+	Callback = function(Value)
+		_G.Spectate_Player = Value
+	end    
+})
+
+COMBATTAP:AddToggle({
+	Name = "TP PLAYER",
+	Default = _G.Teleport_to_Player,
+	Callback = function(Value)
+		_G.Teleport_to_Player = Value
+	end    
+})
+
+COMBATTAP:AddToggle({
+	Name = "AIMBOT SKILLS",
+	Default = false,
+	Callback = function(Value)
+		AimSkillNearest = Value
+	end    
+})
 
     
