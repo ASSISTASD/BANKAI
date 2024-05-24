@@ -69,24 +69,6 @@ function topos(Pos)
     
 -----------------fun
 -----atfarm
-local MonsterStatus = Main:AddLabel("")
-local QuestStatus = Main:AddLabel("")
-
-spawn(function()
-  while task.wait() do
-  if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-  MonsterStatus:Set("[Monster]: ...")
-  QuestStatus:Set("[Quest]: ...".." | [Level]: ...")
-  elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-  pcall(function()
-    CheckQuest()
-    MonsterStatus:Set("[Monster]: "..Mon)
-    QuestStatus:Set("[Quest]: "..NameQuest.." | [Level]: "..LevelQuest)
-    end)
-  end
-  end
-  end)
-  
 
 -------------------mobs for atf
 
