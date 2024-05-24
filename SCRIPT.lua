@@ -229,6 +229,12 @@ getgenv().ToTargets = function(p)
                         if v:FindFirstChild("RemoteFunctionShoot") then 
                             SelectWeaponGun = v.Name
                         end
+                    end
+                end
+            end
+        end)
+    end)
+    
                    
     
 task.spawn(function()
