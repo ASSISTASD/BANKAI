@@ -36,8 +36,6 @@ local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, S
 local Tween = TweenService:Create(object, TweenInfo.new(0.15), {
  Position = pos
 })
-Tween:Play()
-end
 
 function AutoHaki()
         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
