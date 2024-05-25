@@ -808,7 +808,18 @@ spawn(function()
 		end)
 	end)
 	
-	
+spawn(function()
+            while wait() do
+                if _G.AutoFKitsune then
+                    pcall(function()
+                        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
+                            topos(game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island').HumanoidRootPart.CFrame * CFrame.new(0,100,0))
+                        end
+                    end)
+                end
+            end
+        end)
+        
 
 
 ---------
@@ -978,3 +989,11 @@ SEATAP:AddToggle({
 })
 
 
+SEATAP:AddToggle({
+	Name = "AUTO KITSUNE",
+	Default = _G.AutoFKitsune,
+	Callback = function(Value)
+		_G.AutoFKitsune = Value
+        StopTween(_G.AppleAutoDriveBoat)
+	end    
+})
