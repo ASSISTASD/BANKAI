@@ -15,25 +15,32 @@ elseif game.PlaceId == 7449423635 then
 end
  
  --------
-
- local MonsterStatus = Main:AddLabel("")
-local QuestStatus = Main:AddLabel("")
-
 spawn(function()
-  while task.wait() do
-  if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-  MonsterStatus:Set("[Monster]: ...")
-  QuestStatus:Set("[Quest]: ...".." | [Level]: ...")
-  elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-  pcall(function()
-    CheckQuest()
-    MonsterStatus:Set("[Monster]: "..Mon)
-    QuestStatus:Set("[Quest]: "..NameQuest.." | [Level]: "..LevelQuest)
-    end)
-  end
-  end
-  end)
-  
+        while task.wait() do
+            pcall(function()
+                if _G.BringMonster then
+                    CheckQuest()
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.Auto_Bone and StartMagnetBoneMon then
+                            if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and (v.HumanoidRootPart.Position - PosMonBone.Position).Magnitude <= _G.BringMode and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                v.Humanoid:ChangeState(14)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.CFrame = PosMonBone
+                                if v.Humanoid:FindFirstChild("Animator") then
+                                    v.Humanoid.Animator:Destroy()
+                                end
+                                sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                            end
+                        end
+                    end
+                end
+            end)
+      end
+end)
+
+
  	function CheckQuest() 
         MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
         if World1 then
@@ -1375,30 +1382,6 @@ spawn(function()
     end
     end)
 
-function two(gotoCFrame) --- Tween
-      pcall(function()
-          game.Players.LocalPlayer.Character.Humanoid.Sit = false
-          game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-      end)
-      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
-          pcall(function() 
-              tweenz:Cancel()
-          end)
-          game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
-      else
-          local tween_s = game:service"TweenService"
-          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/325, Enum.EasingStyle.Linear)
-           tween, err = pcall(function()
-              tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
-              tweenz:Play()
-          end)
-          if not tween then return err end
-      end
-      function _TweenCanCle()
-          tweenz:Cancel()
-      end
-  
-end
 
 spawn(function()
         while wait() do
@@ -1593,38 +1576,12 @@ STAP:AddToggle({
 	end    
 })
 STAP:AddToggle({
-	Name = "BRING MOBS",
+	Name = "Bring",
 	Default = true,
 	Callback = function(Value)
 		_G.BringMonster = Value
 	end    
 })
---[[
-spawn(function()
-        while task.wait() do
-            pcall(function()
-                if _G.BringMonster then
-                    CheckQuest()
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if _G.Auto_Bone and StartMagnetBoneMon then
-                            if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and (v.HumanoidRootPart.Position - PosMonBone.Position).Magnitude <= _G.BringMode and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                v.Humanoid:ChangeState(14)
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.CFrame = PosMonBone
-                                if v.Humanoid:FindFirstChild("Animator") then
-                                    v.Humanoid.Animator:Destroy()
-                                end
-                                sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                            end
-                        end
-                    end
-                end
-            end)
-      end
-end)
-]]--
 
 local FRUITTAP= Window:MakeTab({
 	Name = "FRUIT",
@@ -1690,6 +1647,30 @@ local args = {
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 
+function two(gotoCFrame) --- Tween
+      pcall(function()
+          game.Players.LocalPlayer.Character.Humanoid.Sit = false
+          game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+      end)
+      if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
+          pcall(function() 
+              tweenz:Cancel()
+          end)
+          game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
+      else
+          local tween_s = game:service"TweenService"
+          local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/325, Enum.EasingStyle.Linear)
+           tween, err = pcall(function()
+              tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
+              tweenz:Play()
+          end)
+          if not tween then return err end
+      end
+      function _TweenCanCle()
+          tweenz:Cancel()
+      end
+  
+end
 
 two(CFrame.new(-5100.7085, 29.968586, -6792.45459, -0.33648631, -0.0396691673, 0.940852463, -6.40461678e-07, 0.999112308, 0.0421253517, -0.941688359, 0.0141740013, -0.336187631))
 
