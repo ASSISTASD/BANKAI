@@ -21,21 +21,7 @@ end
 
 
 --humanoid.WalkSpeed
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
 
-local function MakeDraggable(topbarobject, object)
-local Dragging = nil
-local DragInput = nil
-local DragStart = nil
-local StartPosition = nil
-
-local function Update(input)
-local Delta = input.Position - DragStart
-local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
-local Tween = TweenService:Create(object, TweenInfo.new(0.15), {
- Position = pos
-})
 
 function AutoHaki()
         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
