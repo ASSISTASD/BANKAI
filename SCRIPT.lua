@@ -1553,7 +1553,7 @@ AFTAP:AddDropdown({
 
 
 
-local AFTAP:AddToggle({
+local BoneFarm = AFTAP:AddToggle({
 	Name = "AUTO FARM BONE (not working)",
 	Default = _G.Auto_Bone,
 	Callback = function(Value)
