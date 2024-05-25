@@ -820,6 +820,64 @@ spawn(function()
             end
         end)
         
+spawn(function()
+        while wait() do
+            if  FarmShark and World3 then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Shark" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat task.wait()
+                                        AutoHaki()
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        PosNarathiwat = v.HumanoidRootPart.CFrame
+                                        topos(v.HumanoidRootPart.CFrame * Pos)
+                                        Galaxy = true
+                                        game:GetService("VirtualUser"):CaptureController()
+                                        game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    until not  FarmShark or not v.Parent or v.Humanoid.Health <= 0
+                                    Galaxy = false
+                                end
+                            end
+                        end
+                    else
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
+                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                            if  _G.AutoTerrorsharkhop then
+                                Hop()
+                            end
+                        end
+                    end
+                end)
+            end
+        end
+    end)
+    
+spawn(function()
+    local kitsuneIsland
+    while not kitsuneIsland do
+        kitsuneIsland = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland")
+        wait(1)
+    end
+    while wait() do
+        if _G.tpkit then
+            local shrineActive = kitsuneIsland:FindFirstChild("ShrineActive")
+
+            if shrineActive then
+                for _, v in pairs(shrineActive:GetDescendants()) do
+                    if v:IsA("BasePart") and v.Name:find("NeonShrinePart") then
+                        topos(v.CFrame)
+                    end
+                end
+            end
+        end
+    end
+end)
 
 
 ---------
@@ -994,6 +1052,15 @@ SEATAP:AddToggle({
 	Default = _G.AutoFKitsune,
 	Callback = function(Value)
 		_G.AutoFKitsune = Value
-        StopTween(_G.AppleAutoDriveBoat)
+        StopTween(_G.AutoFKitsune)
+	end    
+})
+
+SEATAP:AddToggle({
+	Name = "TP KITSUNE",
+	Default = _G.tpkit,
+	Callback = function(Value)
+		_G.tpkit = value
+    StopTween(_G.tpkit)
 	end    
 })
