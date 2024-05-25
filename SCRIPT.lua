@@ -166,8 +166,8 @@ function TP1(Pos)
 --Tween Boats 
 function TPB(CFgo)
 	local tween_s = game:service"TweenService"
-	local info = TweenInfo.new((game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
-	tween = tween_s:Create(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat, info, {CFrame = CFgo})
+	local info = TweenInfo.new((game:GetService("Workspace").Boats.Lantern.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
+	tween = tween_s:Create(game:GetService("Workspace").Boats.Lantern.VehicleSeat, info, {CFrame = CFgo})
 	tween:Play()
 
 	local tweenfunc = {}
@@ -760,23 +760,23 @@ spawn(function()
             pcall(function()
                 if _G.AppleAutoDriveBoat then
                     if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
-                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateBrigade") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("Lantern") then
                             buyb = TPP(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
                             if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
                                 if buyb then buyb:Stop() end
                                 local args = {
                                     [1] = "BuyBoat",
-                                    [2] = "PirateBrigade"
+                                    [2] = "Lantern"
                                 }
     
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                             end
-                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateBrigade") then
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("Lantern") then
                             if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                                TPP(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                TPP(game:GetService("Workspace").Boats.Lantern.VehicleSeat.CFrame * CFrame.new(0,1,0))
                             else
                                 for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                                    if v.Name == "PirateBrigade" then
+                                    if v.Name == "Lantern" then
                                         repeat wait()
                                             if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
                                                 TPB(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
@@ -1007,7 +1007,7 @@ wait(0)
 
 local args = {
     [1] = "BuyBoat",
-    [2] = "PirateBrigade"
+    [2] = "Lantern"
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
@@ -1016,7 +1016,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 two(CFrame.new(-5100.7085, 29.968586, -6792.45459, -0.33648631, -0.0396691673, 0.940852463, -6.40461678e-07, 0.999112308, 0.0421253517, -0.941688359, 0.0141740013, -0.336187631))
 
 wait(13)
-for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+for _,v in next, workspace.Boats.Lantern:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
      if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
@@ -1060,7 +1060,17 @@ SEATAP:AddToggle({
 	Name = "TP KITSUNE",
 	Default = _G.tpkit,
 	Callback = function(Value)
-		_G.tpkit = value
+		_G.tpkit = Value
     StopTween(_G.tpkit)
+	end    
+})
+
+
+SEATAP:AddToggle({
+	Name = "FARM SHARK",
+	Default = FarmShark,
+	Callback = function(Value)
+		FarmShark = Value
+    StopTween(FarmShark)
 	end    
 })
