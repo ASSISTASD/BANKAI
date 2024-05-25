@@ -21,6 +21,24 @@ end
 
 
 --humanoid.WalkSpeed
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+local function MakeDraggable(topbarobject, object)
+local Dragging = nil
+local DragInput = nil
+local DragStart = nil
+local StartPosition = nil
+
+local function Update(input)
+local Delta = input.Position - DragStart
+local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
+local Tween = TweenService:Create(object, TweenInfo.new(0.15), {
+ Position = pos
+})
+Tween:Play()
+end
+
 function AutoHaki()
         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
@@ -665,7 +683,30 @@ spawn(function()
     end)
     
 
---------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------sea
+    spawn(function()
+    while wait() do
+		pcall(function()
+			if AutoW then
+				game:service('VirtualInputManager'):SendKeyEvent(true, "W", false, game)
+				wait(0.35)
+				game:service('VirtualInputManager'):SendKeyEvent(false, "W", false, game)
+				wait(1.5)
+				game:service('VirtualInputManager'):SendKeyEvent(true, "S", false, game)
+				wait(0.35)
+				game:service('VirtualInputManager'):SendKeyEvent(false, "S", false, game)
+				wait(1.5)
+			end
+		end)
+    end
+    end)
+
+
+
+
+
+
+---------
 local AFTAP = Window:MakeTab({
 	Name = "AUTO FARM",
 	Icon = "rbxassetid://4483345998",
@@ -773,7 +814,7 @@ local SEATAP = Window:MakeTab({
 
 SEATAP:AddToggle({
 	Name = "AUTO SUMMON MIRAGE",
-	Default = state,
+	Default = _G.dao,
 	Callback = function(state)
 		if state then
         _G.dao = true
@@ -837,5 +878,12 @@ end
 end    
 })
 
+SEATAP:AddToggle({
+	Name = "AUTO DRIVE",
+	Default = AutoW,
+	Callback = function(Value)
+		AutoW = Value
+	end    
+})
 
 
