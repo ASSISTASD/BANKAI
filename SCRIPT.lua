@@ -1599,6 +1599,7 @@ STAP:AddToggle({
 		_G.BringMonster = Value
 	end    
 })
+--[[
 spawn(function()
         while task.wait() do
             pcall(function()
@@ -1623,7 +1624,7 @@ spawn(function()
             end)
       end
 end)
-
+]]--
 
 local FRUITTAP= Window:MakeTab({
 	Name = "FRUIT",
