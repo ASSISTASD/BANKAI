@@ -15,6 +15,24 @@ elseif game.PlaceId == 7449423635 then
 end
  
  --------
+ local MonsterStatus = Main:AddLabel("")
+local QuestStatus = Main:AddLabel("")
+
+spawn(function()
+  while task.wait() do
+  if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+  MonsterStatus:Set("[Monster]: ...")
+  QuestStatus:Set("[Quest]: ...".." | [Level]: ...")
+  elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+  pcall(function()
+    CheckQuest()
+    MonsterStatus:Set("[Monster]: "..Mon)
+    QuestStatus:Set("[Quest]: "..NameQuest.." | [Level]: "..LevelQuest)
+    end)
+  end
+  end
+  end)
+  
  	function CheckQuest() 
         MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
         if World1 then
