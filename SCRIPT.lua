@@ -2505,6 +2505,91 @@ spawn(function()
         end)
     end
 end)
+spawn(function()
+	    while wait(2) do
+		    if FlowerESP then
+			    UpdateFlowerChams() 
+		    end
+		    if DevilFruitESP then
+			    UpdateDevilChams() 
+		    end
+		    if ChestESP then
+			    UpdateChestChams() 
+		    end
+		    if ESPPlayer then
+			    UpdatePlayerChams()
+		    end
+		    if RealFruitESP then
+			    UpdateRealFruitChams()
+		    end
+	    end
+    end)
+function UpdateIslandMirageESP() 
+    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+        pcall(function()
+            if MirageIslandESP then 
+                if v.Name == "Mirage Island" then
+                    if not v:FindFirstChild('NameEsp') then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = "Code"
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        name.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    else
+                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp') then
+                    v:FindFirstChild('NameEsp'):Destroy()
+                end
+            end
+        end)
+    end
+end
+function UpdateAfdESP() 
+    for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+        pcall(function()
+            if AfdESP then 
+                if v.Name == "Advanced Fruit Dealer" then
+                    if not v:FindFirstChild('NameEsp') then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = "Code"
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        name.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    else
+                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp') then
+                    v:FindFirstChild('NameEsp'):Destroy()
+                end
+            end
+        end)
+    end
+end
 
 ---------
 local AFTAP = Window:MakeTab({
@@ -2728,32 +2813,44 @@ ESPTAP:AddToggle({
 
 ESPTAP:AddToggle({
 	Name = "ESP CHEST",
-	Default = _G.AutoFKitsune,
+	Default = false,
 	Callback = function(a)
 		ChestESP = a
 	UpdateChestChams() 
 	end    
 })
+ESPTAP:AddToggle({
+	Name = "ESP REAL FRUIT",
+	Default = false,
+	Callback = function(a)
+		RealFruitESP = a
+	UpdateRealFruitChams() 
+	end    
+})
 local Sectionsea = ESPTAP:AddSection({
-	Name = "ESP V2"
+	Name = "INFO MIRAGE ESP"
 })
 
 ESPTAP:AddToggle({
-	Name = "TP KITSUNE",
-	Default = _G.tpkit,
+	Name = "ESP MIRAGE",
+	Default = false,
 	Callback = function(Value)
-		_G.tpkit = Value
-    StopTween(_G.tpkit)
+		MirageIslandESP = Value
+        while MirageIslandESP do wait()
+            UpdateIslandMirageESP()
+        end
 	end    
 })
 
 
 ESPTAP:AddToggle({
-	Name = "Teleport Advanced Fruit Dealer",
+	Name = "ESP ADVANCED FRUIT DEALER",
 	Default = _G.Miragenpc,
 	Callback = function(Value)
-		_G.Miragenpc = Value
-        StopTween(_G.Miragenpc)
+		AfdESP = Value
+        while AfdESP do wait()
+            UpdateAfdESP()
+        end
 	end    
 })
 
