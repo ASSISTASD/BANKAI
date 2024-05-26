@@ -2902,7 +2902,7 @@ local MISCTAP = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local Sectionmisc = ESPTAP:AddSection({
+local Sectionmisc = MISCTAP:AddSection({
 	Name = "PLAYERS"
 })
 MISCTAP:AddToggle({
