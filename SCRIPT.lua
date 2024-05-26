@@ -2590,6 +2590,32 @@ function UpdateAfdESP()
         end)
     end
 end
+----------
+spawn(function()
+			while task.wait() do
+				pcall(function()
+					if _G.WalkWater then
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+					else
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+					end
+				end)
+			end
+		end)
+
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.No_clip then
+                for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false    
+                    end
+                end
+            end
+        end)
+    end)
+end)
 
 ---------
 local AFTAP = Window:MakeTab({
@@ -2851,6 +2877,47 @@ ESPTAP:AddToggle({
         while AfdESP do wait()
             UpdateAfdESP()
         end
+	end    
+})
+------------------------
+local TPTAP = Window:MakeTab({
+	Name = "TP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Sectionesp = ESPTAP:AddSection({
+	Name = "TP RACE V4"
+})
+TPTAP:AddButton({
+	Name = "Teleport Temple Of Time",
+	Callback = function()
+      		Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+  	end    
+})
+-----------
+local MISCTAP = Window:MakeTab({
+	Name = "MISC",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Sectionmisc = ESPTAP:AddSection({
+	Name = "PLAYERS"
+})
+MISCTAP:AddToggle({
+	Name = "WALK IN WATER",
+	Default = false,
+	Callback = function(Value)
+		_G.WalkWater = Value
+	end    
+})
+
+MISCTAP:AddToggle({
+	Name = "NO CLIP",
+	Default = false,
+	Callback = function(Value)
+		_G.No_clip = Value
 	end    
 })
 
